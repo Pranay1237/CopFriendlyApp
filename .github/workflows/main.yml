@@ -21,6 +21,12 @@ jobs:
       - name: Install Expo CLI
         run: npm install -g expo-cli
 
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Log in to Expo
         env:
           EXPO_CLI_USERNAME: ${{ secrets.EXPO_CLI_USERNAME }}
