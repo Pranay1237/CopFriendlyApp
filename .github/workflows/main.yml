@@ -3,7 +3,7 @@ name: Expo CI/CD
 on:
   push:
     branches:
-      - master  # or whatever branch you want to trigger the workflow
+      - master  # or whichever branch you want to trigger the workflow
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       run: npm install
 
     - name: Build Expo project
-      run: expo build:android  # or expo build:ios for iOS builds
+      run: npx expo-cli build:android  # or npx expo-cli build:ios for iOS builds
 
     - name: Save APK file as artifact
       uses: actions/upload-artifact@v2
