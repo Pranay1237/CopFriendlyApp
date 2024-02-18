@@ -1,34 +1,33 @@
-name: Expo CI/CD
+name: Expo App Build
 
 on:
   push:
     branches:
-      - master  # or whichever branch you want to trigger the workflow
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'  # or whichever Node.js version your project requires
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
 
-    - name: Install Expo CLI
-      run: npm install -g expo-cli
+      - name: Install Expo CLI
+        run: npm install -g expo-cli
 
-    - name: Install dependencies
-      run: npm install
+      - name: Log in to Expo
+        env:
+          EXPO_CLI_USERNAME: ${{ secrets.EXPO_CLI_USERNAME }}
+          EXPO_CLI_PASSWORD: ${{ secrets.EXPO_CLI_PASSWORD }}
+        run: |
+          expo login --non-interactive -u $EXPO_CLI_USERNAME
+          expo whoami # for verification
 
-    - name: Build Expo project
-      run: npx expo-cli build:android  # or npx expo-cli build:ios for iOS builds
-
-    - name: Save APK file as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: my-app-release
-        path: ./build/outputs/apk/*.apk  # Adjust the path to match your project structure
+      - name: Creating build using EAS
+        run: npx eas build -p android --profile preview
