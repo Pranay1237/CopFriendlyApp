@@ -36,4 +36,10 @@ jobs:
           expo whoami # for verification
 
       - name: Creating build using EAS
-        run: npx eas build -p android --profile preview
+        run: npx eas build -p android
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: expo-build
+          path: ./build/output/apk/app-release.apk
