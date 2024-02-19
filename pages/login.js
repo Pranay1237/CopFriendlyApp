@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 
-const Login = () => {
+export default Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -51,5 +51,3 @@ const styles = StyleSheet.create({
     width: '50%',
   },
 });
-
-export default Login;
