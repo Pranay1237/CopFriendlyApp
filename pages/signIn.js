@@ -10,10 +10,6 @@ export default SignIn = ({ navigation }) => {
         console.log('Signed In...');
     };
 
-    const changePage = () => {
-        console.log('Changing Page...');
-    }
-
     return (
         <View style={styles.container}>
 

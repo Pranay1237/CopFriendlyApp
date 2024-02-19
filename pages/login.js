@@ -9,10 +9,6 @@ export default Login = ({ navigation }) => {
     console.log('Logging in...');
   };
 
-  const changepage = () => {
-    console.log('Changing Page...');
-  }
-
   return (
     <View style={styles.container}>
       
