@@ -25,24 +25,26 @@ export default Menu = () => {
     return (
         <View style={styles.container}>
 
+            {/* TODO: change the pages from text to recycler view or someother thing which looks good */}
+
             <Text
-            style={styles.heading}>Some Heading</Text>
+            style={styles.heading}>NAVIGATION MENU</Text>
 
             <Text
             style={styles.text}
-            onPress={TrafficViolation}>Register Traffic Violation</Text>
+            onPress={TrafficViolation}>REGISTER TRAFFIC VIOLATION</Text>
 
             <Text
             style={styles.text}
-            onPress={IssueTicket}>Issue Ticket</Text>
+            onPress={IssueTicket}>ISSUE TICKET</Text>
 
             <Text
             style={styles.text}
-            onPress={AcceptPayment}>AcceptPayment</Text>
+            onPress={AcceptPayment}>ACCEPT PAYMENT</Text>
 
             <Text
             style={styles.text}
-            onPress={Emergency}>Emergency</Text>
+            onPress={Emergency}>EMERGENCY</Text>
 
             <Text 
             style={styles.sos}
@@ -62,8 +64,8 @@ const styles = StyleSheet.create({
     sos : {
         backgroundColor: 'rgba(255, 100, 100, 0.8)',
         borderRadius: 100,
-        paddingHorizontal: 20,
-        paddingVertical: 20,
+        paddingHorizontal: 30,
+        paddingVertical: 35,
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 10,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         margin: 10,
-        borderRadius: 20,
+        borderRadius: 10,
         fontWeight: 'bold',
         color: 'black',
         backgroundColor: 'lightblue',

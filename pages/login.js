@@ -7,6 +7,13 @@ export default Login = ({ navigation }) => {
 
   const handleLogin = () => {
     console.log('Logging in...');
+
+    navigation.navigate('Menu'); //TODO: Navigate to the menu page after the login
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Menu' }],
+    }); // This code is to not let the app go back to login screen after loggin in when the back button is presseds
   };
 
   return (
@@ -31,7 +38,7 @@ export default Login = ({ navigation }) => {
 
       <Text
       style={styles.button}
-      onPress={handleLogin}>LOGIN</Text>
+      onPress={(handleLogin)}>LOGIN</Text>
 
       <Text 
       style={styles.signin}
@@ -46,7 +53,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 150,
+    paddingBottom: 150,
+    backgroundColor: 'white',
   },
   heading: {
     fontSize: 24,
@@ -76,6 +84,7 @@ const styles = StyleSheet.create({
   signin: {
     color: 'blue',
     width: '90%',
+    marginTop: 10,
     fontWeight: 'bold',
     textAlign: 'right',
   }

@@ -58,8 +58,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: 'white',
         alignItems: 'center',
-        marginBottom: 70,
+        paddingBottom: 70,
     },
     heading: {
         fontSize: 24,
@@ -96,6 +97,7 @@ const styles = StyleSheet.create({
     login: {
         color: 'blue',
         width: '90%',
+        marginTop: 10,
         fontWeight: 'bold',
         textAlign: 'right',
     }
