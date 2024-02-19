@@ -1,13 +1,24 @@
+// import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Login from './pages/login';
+import SignIn from './pages/signIn';
+import Menu from './pages/menu';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>Changes you make will automatically reload.</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signin" component={SignIn} />
+        <Stack.Screen name="Menu" component={Menu} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
