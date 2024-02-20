@@ -8,6 +8,22 @@ export default SignIn = ({ navigation }) => {
 
     const handleLogin = () => {
         console.log('Signed In...');
+
+        navigation.navigate('Menu');
+
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Menu' }],
+        });
+    };
+
+    const changepage = () => {
+        navigation.navigate('Login');
+
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Login' }],
+        });
     };
 
     return (
@@ -48,7 +64,7 @@ export default SignIn = ({ navigation }) => {
 
             <Text
             style={styles.login}
-            onPress={() => navigation.navigate('Login')}>Already Have an Account? Log In</Text>
+            onPress={changepage}>Already Have an Account? Log In</Text>
 
         </View>
     );

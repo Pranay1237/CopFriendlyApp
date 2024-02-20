@@ -16,6 +16,15 @@ export default Login = ({ navigation }) => {
     }); // This code is to not let the app go back to login screen after loggin in when the back button is presseds
   };
 
+  const changepage = () => {
+    navigation.navigate('Signin');
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Signin' }],
+    });
+  }
+
   return (
     <View style={styles.container}>
       
@@ -38,11 +47,11 @@ export default Login = ({ navigation }) => {
 
       <Text
       style={styles.button}
-      onPress={(handleLogin)}>LOGIN</Text>
+      onPress={handleLogin}>LOGIN</Text>
 
       <Text 
       style={styles.signin}
-      onPress={() => navigation.navigate('Signin')}>Don't Have an Account? Sign in</Text>
+      onPress={changepage}>Don't Have an Account? Sign in</Text>
 
     </View>
   );

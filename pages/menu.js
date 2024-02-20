@@ -1,21 +1,29 @@
 import { Button, View, StyleSheet, Text } from 'react-native';
 
-export default Menu = () => {
+export default Menu = ({ navigation }) => {
 
     const TrafficViolation = () => {
         console.log('Registered a Traffic Violation');
+
+        navigation.navigate('RegisterViolator');
     }
 
     const IssueTicket = () => {
         console.log('Issued a Ticket');
+
+        navigation.navigate('Ticket');
     }
 
     const AcceptPayment = () => {
         console.log('Accepted Payment');
+
+        navigation.navigate('Payment');
     }
 
     const Emergency = () => {
         console.log('Emergency');
+
+        navigation.navigate('Emergency');
     }
 
     const sos = () => {
