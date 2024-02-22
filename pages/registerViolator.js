@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, TextInput, View, StyleSheet, Button } from "react-native";
+import { Text, TextInput, View, StyleSheet, Button, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DatePicker from '@react-native-community/datetimepicker';
 
@@ -58,84 +58,86 @@ export default RegisterViolator = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scroll}>
+            <View style={styles.container}>
 
-            <TextInput
-                style={styles.input}
-                placeholder="Violators Name"
-                value={formData.violatorName}
-                onChangeText={value => handleInputChange('violatorName', value)}
-            />
-
-            <TextInput
-                style={styles.input}
-                placeholder="Violation Type"
-                value={formData.violationType}
-                onChangeText={value => handleInputChange('violationType', value)}
-            />
-
-            <TextInput
-                style={styles.input}
-                placeholder="Driving License Number"
-                value={formData.drivingLicense}
-                onChangeText={value => handleInputChange('drivingLicense', value)}
-            />
-
-            <Picker
-                style={styles.picker}
-                selectedValue={formData.vehicleType}
-                onValueChange={value => handleInputChange('vehicleType', value)}>
-                <Picker.Item label="Select a Vehicle Type" value="" />
-                <Picker.Item label="Bike" value="Bike" />
-                <Picker.Item label="Car" value="Car" />
-                <Picker.Item label="Bus" value="Bus" />
-                <Picker.Item label="Truck" value="Truck" />
-                <Picker.Item label="Auto" value="Auto" />
-                <Picker.Item label="Other" value="Other" />
-            </Picker>
-
-            <TextInput
-                style={styles.input}
-                placeholder="Registration Number"
-                value={formData.RegistrationNumber}
-                onChangeText={value => handleInputChange('RegistrationNumber', value)}
-            />
-
-            <TextInput
-                style={styles.input}
-                placeholder="Vehicle Color"
-                value={formData.vehicleColor}
-                onChangeText={value => handleInputChange('vehicleColor', value)}
-            />
-
-            <Text style={styles.input} onPress={showDatePickerModal}>Select Date : {formData.date.toDateString()}</Text>
-
-            {showDatePicker && (
-                <DatePicker
-                value={formData.date}
-                mode="date"
-                display="default"
-                onChange={(event, date) => {
-                    handleDateChange(date);
-                    hideDatePickerModal();
-                }}/>
-            )};
-
-            <Text style={styles.input} onPress={showTimePickerModal}>Select Time : {formData.time.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}</Text>
-
-            {showTimePicker && (
-                <DatePicker
-                value={formData.time}
-                mode="time"
-                display="default"
-                onChange={(event, time) => {
-                    handleTimeChange(time);
-                    hideTimePickerModal();
-                }}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Violators Name"
+                    value={formData.violatorName}
+                    onChangeText={value => handleInputChange('violatorName', value)}
                 />
-            )};
 
-        </View>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Violation Type"
+                    value={formData.violationType}
+                    onChangeText={value => handleInputChange('violationType', value)}
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Driving License Number"
+                    value={formData.drivingLicense}
+                    onChangeText={value => handleInputChange('drivingLicense', value)}
+                />
+
+                <Picker
+                    style={styles.picker}
+                    selectedValue={formData.vehicleType}
+                    onValueChange={value => handleInputChange('vehicleType', value)}>
+                    <Picker.Item label="Select a Vehicle Type" value="" />
+                    <Picker.Item label="Bike" value="Bike" />
+                    <Picker.Item label="Car" value="Car" />
+                    <Picker.Item label="Bus" value="Bus" />
+                    <Picker.Item label="Truck" value="Truck" />
+                    <Picker.Item label="Auto" value="Auto" />
+                    <Picker.Item label="Other" value="Other" />
+                </Picker>
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Registration Number"
+                    value={formData.RegistrationNumber}
+                    onChangeText={value => handleInputChange('RegistrationNumber', value)}
+                />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Vehicle Color"
+                    value={formData.vehicleColor}
+                    onChangeText={value => handleInputChange('vehicleColor', value)}
+                />
+
+                <Text style={styles.input} onPress={showDatePickerModal}>Select Date : {formData.date.toDateString()}</Text>
+
+                {showDatePicker && (
+                    <DatePicker
+                    value={formData.date}
+                    mode="date"
+                    display="default"
+                    onChange={(event, date) => {
+                        handleDateChange(date);
+                        hideDatePickerModal();
+                    }}/>
+                )}
+
+                <Text style={styles.input} onPress={showTimePickerModal}>Select Time : {formData.time.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}</Text>
+
+                {showTimePicker && (
+                    <DatePicker
+                    value={formData.time}
+                    mode="time"
+                    display="default"
+                    onChange={(event, time) => {
+                        handleTimeChange(time);
+                        hideTimePickerModal();
+                    }}
+                    />
+                )}
+
+            </View>
+        </ScrollView>
     );
 };
 
@@ -145,6 +147,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+        width: '100%',
+        height: '100%',
+    },
+    scroll: {
+        flexGrow: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     input: {
         width: '90%',
