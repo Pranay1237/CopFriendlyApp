@@ -7,6 +7,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './pages/login';
 import SignIn from './pages/signIn';
 import Menu from './pages/menu';
+import RegisterViolator from './pages/registerViolator';
+import Ticket from './pages/ticket';
+import Payment from './pages/payment';
+import Emergency from './pages/emergency';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +21,10 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signin" component={SignIn} />
         <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="RegisterViolator" component={RegisterViolator} />
+        <Stack.Screen name="Ticket" component={Ticket} />
+        <Stack.Screen name="Payment" component={Payment} />
+        <Stack.Screen name="Emergency" component={Emergency} />
       </Stack.Navigator>
     </NavigationContainer>
   );
