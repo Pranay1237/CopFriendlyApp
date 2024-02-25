@@ -26,6 +26,12 @@ export default Menu = ({ navigation }) => {
         navigation.navigate('Emergency');
     }
 
+    const Experiment = () => {
+        console.log('Experiment');
+
+        navigation.navigate('experiment');
+    }
+
     const sos = () => {
         console.log('SOS');
     }
@@ -54,6 +60,10 @@ export default Menu = ({ navigation }) => {
             style={styles.text}
             onPress={Emergency}>EMERGENCY</Text>
 
+            <Text
+            style={styles.text}
+            onPress={Experiment}>EXPERIMENT</Text>
+
             <Text 
             style={styles.sos}
             onPress={sos}>SOS</Text>
@@ -77,7 +87,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 10,
-        marginTop: 70,
+        marginTop: 30,
         fontWeight: 'bold',
     },
     text : {

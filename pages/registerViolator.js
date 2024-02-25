@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Text, TextInput, View, StyleSheet, Button, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DatePicker from '@react-native-community/datetimepicker';
+import { Text, TextInput, View, StyleSheet, Button, ScrollView, ToastAndroid } from "react-native";
 
 export default RegisterViolator = ({ navigation }) => {
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -57,6 +57,16 @@ export default RegisterViolator = ({ navigation }) => {
         setShowTimePicker(false);
     };
 
+    const submitForm = () => {
+        if (formData.violatorName === "" || formData.violationType === "" || formData.drivingLicense === "" || formData.vehicleType === "" || formData.RegistrationNumber === "") {
+            ToastAndroid.show('Please Enter all the Details', ToastAndroid.SHORT);
+            return;
+        }
+        console.log('Form Submitted');
+        ToastAndroid.show('Form Submitted', ToastAndroid.SHORT);
+        console.log(formData);
+    }
+
     return (
         <ScrollView contentContainerStyle={styles.scroll}>
             <View style={styles.container}>
@@ -69,7 +79,9 @@ export default RegisterViolator = ({ navigation }) => {
                 />
 
                 <TextInput
-                    style={styles.input}
+                    style={styles.textArea}
+                    multiline
+                    numberOfLines={4}
                     placeholder="Violation Type"
                     value={formData.violationType}
                     onChangeText={value => handleInputChange('violationType', value)}
@@ -136,6 +148,18 @@ export default RegisterViolator = ({ navigation }) => {
                     />
                 )}
 
+                <TextInput
+                    style={styles.input}
+                    placeholder="other"
+                    value={formData.others}
+                    onChangeText={value => handleInputChange('others', value)}
+                />
+
+                <Text style={styles.submit}
+                onPress={submitForm}>
+                    Add as Violator
+                </Text>
+
             </View>
         </ScrollView>
     );
@@ -170,4 +194,26 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 2,
     },
+    submit: {
+        width: '90%',
+        borderRadius: 15,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop: 10,
+        borderWidth: 1,
+        borderColor: 'black',
+        backgroundColor: 'black',
+        padding: 10,
+        color: 'white',
+    },
+    textArea: {
+        width: '90%',
+        height: 100,
+        borderColor: 'gray',
+        borderWidth: 1.5,
+        borderRadius: 15,
+        padding: 10,
+        margin: 10,
+        textAlignVertical: 'top',
+    }
 });
