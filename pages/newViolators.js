@@ -22,9 +22,9 @@ export default NewViolators = ({ navigation }) => {
         setFilteredData(filtered);
     };
 
-    const moreDetails = () => {
+    const moreDetails = (drivingLicense) => {
         console.log('Navigating to More Details');
-        navigation.navigate('moreDetails');
+        navigation.navigate('moreDetails', { number : drivingLicense });
     };
 
     const issueTicket = () => {
@@ -43,7 +43,7 @@ export default NewViolators = ({ navigation }) => {
                     {isExpanded && (
                         <View style={styles.expand}>
                             <Text style={styles.innerText}
-                            onPress={moreDetails}>
+                            onPress={() => moreDetails(item.drivingLicense)}>
                                 More Details
                             </Text>
                             <Text style={styles.innerText}
