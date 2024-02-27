@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
 
 import jsonData from '../violators.json';
 
@@ -9,8 +9,8 @@ export default MoreDetails = ({ navigation, route }) => {
     
     const violator = jsonData.find(v => v.drivingLicense === number);
 
-    const changeTime = () => {
-        const timeString = new Date(violator.time).toISOString();
+    const changeTime = (time) => {
+        const timeString = new Date(time).toISOString();
         const timeOnly = timeString.split("T")[1].substring(0, 5);
         const [hours, minutes] = timeOnly.split(":");
         const twelveHourFormat = (parseInt(hours, 10) % 12).toString();
@@ -19,8 +19,8 @@ export default MoreDetails = ({ navigation, route }) => {
         return formattedTime;
     }
 
-    const changeDate = () => {
-        const dateObject = new Date(violator.date);
+    const changeDate = (date) => {
+        const dateObject = new Date(date);
         const day = dateObject.getDate();
         const month = dateObject.getMonth() + 1;
         const year = dateObject.getFullYear();
@@ -28,58 +28,79 @@ export default MoreDetails = ({ navigation, route }) => {
         return formattedDate;
     }
 
-    const time = changeTime();
-    const date = changeDate();
+    const time = changeTime(violator.time);
+    const date = changeDate(violator.date);
+
+    const ticks = [];
+
+    for (let i = 0; i < violator.tickets.length; i++) {
+        ticks.push(violator.tickets[i]);
+    }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.heading}>Information about the violator</Text>
-            <View style={styles.details}>
-                <Text style={styles.label}>Name</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{violator.violatorName}</Text>
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.box}>
+                    <Text style={styles.heading}>Information about the violator</Text>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Name</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{violator.violatorName}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Violation Type</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{violator.violationType}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Driving License</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{violator.drivingLicense}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Vehicle Type</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{violator.vehicleType}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Registration Number</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{violator.registrationNumber}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Vehicle Color</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{violator.vehicleColor}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Date</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{date}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Time</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{time}</Text>
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.label}>Others</Text>
+                        <Text> : </Text>
+                        <Text style={styles.value}>{violator.others}</Text>
+                    </View>
+                </View>
+                <View style={styles.box}>
+                    <Text style={styles.heading}>Tickets Information</Text>
+                    {ticks.map((tick, index) => (
+                        <View key={index} style={styles.innerBox}>
+                            <Text>Amount : {tick.amount}</Text>
+                            <Text>Date : {changeDate(tick.date)}</Text>
+                            <Text>Time : {changeTime(tick.time)}</Text>
+                            <Text>Location : {tick.location}</Text>
+                        </View>
+                    ))}
+                </View>
             </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Violation Type</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{violator.violationType}</Text>
-            </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Driving License</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{violator.drivingLicense}</Text>
-            </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Vehicle Type</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{violator.vehicleType}</Text>
-            </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Registration Number</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{violator.registrationNumber}</Text>
-            </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Vehicle Color</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{violator.vehicleColor}</Text>
-            </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Date</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{date}</Text>
-            </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Time</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{time}</Text>
-            </View>
-            <View style={styles.details}>
-                <Text style={styles.label}>Others</Text>
-                <Text> : </Text>
-                <Text style={styles.value}>{violator.others}</Text>
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -87,6 +108,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 20,
+        backgroundColor: '#f0f0f0',
     },
     heading: {
         fontSize: 20,
@@ -104,5 +126,17 @@ const styles = StyleSheet.create({
     },
     value: {
         flex: 1,
+    },
+    box: {
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: 'white',
+        marginBottom: 20,
+    },
+    innerBox: {
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 10,
+        backgroundColor: 'lightgrey',
     },
 });
