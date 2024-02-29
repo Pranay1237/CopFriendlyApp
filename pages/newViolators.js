@@ -19,7 +19,13 @@ export default NewViolators = ({ navigation }) => {
         const filtered = jsonData.filter(item =>
             item.violatorName.toLowerCase().includes(query.toLowerCase())
         );
-        setFilteredData(filtered);
+
+        const filtered2 = jsonData.filter(item =>
+            item.drivingLicense.toLowerCase().includes(query.toLowerCase())
+        );
+
+        const res = [...new Set([...filtered, ...filtered2])];
+        setFilteredData(res)
     };
 
     const moreDetails = (drivingLicense) => {
@@ -68,6 +74,11 @@ export default NewViolators = ({ navigation }) => {
         navigation.navigate('RegisterViolator');
     };
 
+    const changeEmergency = () => {
+        console.log('Navigating to Emergency');
+        navigation.navigate('Emergency');
+    }
+
     return (
         <View>
             <TextInput
@@ -83,11 +94,17 @@ export default NewViolators = ({ navigation }) => {
                 renderItem={renderItem}
                 keyExtractor={item => item.drivingLicense.toString()}
             />)}
-            <Text 
-            style={styles.text}
-            onPress={changePage}>
-                Add New Violator
-            </Text>
+            <View style={styles.bottom}>
+                <Text 
+                    style={styles.text}
+                    onPress={changePage}>
+                        Add New Violator
+                </Text>
+                <Text style={styles.text1}
+                    onPress={changeEmergency}>
+                    Add an Emergency
+                </Text>
+            </View>
         </View>
     );
 };
@@ -105,6 +122,17 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         borderRadius: 10,
+        paddingHorizontal: 20,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'center',
+    },
+    text1: {
+        backgroundColor: 'red',
+        padding: 10,
+        margin: 10,
+        borderRadius: 10,
+        paddingHorizontal: 20,
         fontWeight: 'bold',
         color: 'black',
         textAlign: 'center',
@@ -145,5 +173,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
         backgroundColor: 'lightblue',
+    },
+    bottom: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
     },
 });

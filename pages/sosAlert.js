@@ -15,7 +15,7 @@ const SOSAlert = ({ onCancel }) => {
 
   useEffect(() => {
     if (timer === 0) {
-      onCancel();
+        onCancel();
     }
   }, [timer]);
 
