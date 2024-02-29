@@ -33,9 +33,9 @@ export default NewViolators = ({ navigation }) => {
         navigation.navigate('moreDetails', { number : drivingLicense });
     };
 
-    const issueTicket = () => {
+    const issueTicket = (drivingLicense) => {
         console.log('Navigating to Issue Ticket');
-        navigation.navigate('Ticket');
+        navigation.navigate('Ticket', { number : drivingLicense });
     }
 
     const renderItem = ({ item, index }) => {
@@ -53,7 +53,7 @@ export default NewViolators = ({ navigation }) => {
                                 More Details
                             </Text>
                             <Text style={styles.innerText}
-                            onPress={issueTicket}>
+                            onPress={() => issueTicket(item.drivingLicense)}>
                                 issue a ticket
                             </Text>
                         </View>

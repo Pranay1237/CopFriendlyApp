@@ -2,10 +2,24 @@ import React, { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import DatePicker from '@react-native-community/datetimepicker';
 import { Text, TextInput, View, StyleSheet, Button, ScrollView, ToastAndroid } from "react-native";
+// import { get } from "http";
 
 export default RegisterViolator = ({ navigation }) => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
+
+    const getCurrentDateTime = () => {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+        const day = ('0' + currentDate.getDate()).slice(-2);
+        const hours = ('0' + currentDate.getHours()).slice(-2);
+        const minutes = ('0' + currentDate.getMinutes()).slice(-2);
+        const seconds = ('0' + currentDate.getSeconds()).slice(-2);
+    
+        const currentDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        return currentDateTime;
+    };
 
     const [formData, setFormData] = useState({
         violatorName: '',
@@ -14,8 +28,7 @@ export default RegisterViolator = ({ navigation }) => {
         vehicleType: '',
         RegistrationNumber: '',
         vehicleColor: '',
-        date: new Date(),
-        time: new Date(),
+        date: getCurrentDateTime(),
         location: '',
         others: ''
     });
@@ -77,22 +90,25 @@ export default RegisterViolator = ({ navigation }) => {
                     value={formData.violatorName}
                     onChangeText={value => handleInputChange('violatorName', value)}
                 />
-
-                <TextInput
-                    style={styles.textArea}
-                    multiline
-                    numberOfLines={4}
-                    placeholder="Violation Type"
-                    value={formData.violationType}
-                    onChangeText={value => handleInputChange('violationType', value)}
-                />
-
                 <TextInput
                     style={styles.input}
                     placeholder="Driving License Number"
                     value={formData.drivingLicense}
                     onChangeText={value => handleInputChange('drivingLicense', value)}
                 />
+
+                <Picker
+                    style={styles.picker}
+                    selectedValue={formData.vehicleType}
+                    onValueChange={value => handleInputChange('vehicleType', value)}>
+                    <Picker.Item label="Select a Violation Type" value="" />
+                    <Picker.Item label="speeding" value="speeding" />
+                    <Picker.Item label="Parking Violation" value="Parking Violation" />
+                    <Picker.Item label="running red light" value="running red light" />
+                    <Picker.Item label="drunk and drive" value="drunk and drive" />
+                    <Picker.Item label="Other" value="Other" />
+                </Picker>
+
 
                 <Picker
                     style={styles.picker}
@@ -120,40 +136,9 @@ export default RegisterViolator = ({ navigation }) => {
                     value={formData.vehicleColor}
                     onChangeText={value => handleInputChange('vehicleColor', value)}
                 />
-
-                <Text style={styles.input} onPress={showDatePickerModal}>Select Date : {formData.date.toDateString()}</Text>
-
-                {showDatePicker && (
-                    <DatePicker
-                    value={formData.date}
-                    mode="date"
-                    display="default"
-                    onChange={(event, date) => {
-                        handleDateChange(date);
-                        hideDatePickerModal();
-                    }}/>
-                )}
-
-                <Text style={styles.input} onPress={showTimePickerModal}>Select Time : {formData.time.toDateString()}</Text>
-
-                {showTimePicker && (
-                    <DatePicker
-                    value={formData.time}
-                    mode="time"
-                    display="default"
-                    onChange={(event, time) => {
-                        handleTimeChange(time);
-                        hideTimePickerModal();
-                    }}
-                    />
-                )}
-
-                <TextInput
-                    style={styles.input}
-                    placeholder="other"
-                    value={formData.others}
-                    onChangeText={value => handleInputChange('others', value)}
-                />
+                <Text style={styles.dateTime}>
+                    Date Time : {formData.date}
+                </Text>
 
                 <Text style={styles.submit}
                 onPress={submitForm}>
@@ -164,6 +149,7 @@ export default RegisterViolator = ({ navigation }) => {
         </ScrollView>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {
@@ -215,5 +201,11 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         textAlignVertical: 'top',
-    }
+    },
+    dateTime: {
+        width: '90%',
+        textAlign: 'center',
+        fontSize: 17,
+        margin: 10,
+    },
 });
