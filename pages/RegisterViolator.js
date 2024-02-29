@@ -96,7 +96,7 @@ export default RegisterViolator = ({ navigation }) => {
 
                 <Picker
                     style={styles.picker}
-                    selectedValue={formData.vehicleType}
+                    selectedValue={formData?.vehicleType || null}
                     onValueChange={value => handleInputChange('vehicleType', value)}>
                     <Picker.Item label="Select a Vehicle Type" value="" />
                     <Picker.Item label="Bike" value="Bike" />
@@ -134,7 +134,7 @@ export default RegisterViolator = ({ navigation }) => {
                     }}/>
                 )}
 
-                <Text style={styles.input} onPress={showTimePickerModal}>Select Time : {formData.time.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}</Text>
+                <Text style={styles.input} onPress={showTimePickerModal}>Select Time : {formData.time.toDateString()}</Text>
 
                 {showTimePicker && (
                     <DatePicker

@@ -1,21 +1,63 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { TextInput, View, StyleSheet, Text } from "react-native";
 import { Picker } from '@react-native-picker/picker';
+import { REGISTER_API } from "./urls";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 export default SignIn = ({ navigation }) => {
 
     const [selectedValue, setSelectedValue] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [repass, setRepass] = useState('');
+    const [name, setName] = useState('');
 
-    const handleLogin = () => {
-        console.log('Signed In...');
+    const handleLogin = async () => {
+        if (password !== repass) {
+            alert('Passwords do not match');
+            return;
+        }
+        try {
+            console.log(REGISTER_API)
+            console.log({
+                name: name,
+                email: username,
+                password: password,
+            })
+            const res = await axios.post(REGISTER_API, {
+                name: name,
+                email: username,
+                password: password,
+            });
+            if (res.status === 200) {
+                alert('User Created');
+                console.log(res.data);
+                await AsyncStorage.setItem('user', JSON.stringify(res.data));
+                // navigation.navigate('Login');
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Menu' }],
+                });
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
 
-        navigation.navigate('Menu');
 
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'Menu' }],
-        });
+
+        // console.log('Signed In...');
+
+        // navigation.navigate('Menu');
+
+        // navigation.reset({
+        //     index: 0,
+        //     routes: [{ name: 'Menu' }],
+        // });
     };
+
+
 
     const changepage = () => {
         navigation.navigate('Login');
@@ -28,43 +70,52 @@ export default SignIn = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-
             <Text
-            style={styles.heading}>SIGN IN</Text>
-
+                style={styles.heading}>SIGN IN</Text>
+            <TextInput
+                style={styles.input}
+                placeholder="Name"
+                value={name}
+                onChangeText={setName}
+            />
             <TextInput
                 style={styles.input}
                 placeholder="Username"
+                value={username}
+                onChangeText={setUsername}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
                 secureTextEntry
+                value={password}
+                onChangeText={setPassword}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Confirm Password"
                 secureTextEntry
+                value={repass}
+                onChangeText={setRepass}
             />
-
-            <Picker
-            style={styles.picker}
-            selectedValue={selectedValue}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+            {/* <Picker
+                style={styles.picker}
+                selectedValue={selectedValue}
+                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
                 <Picker.Item label="Select your role" value="" />
                 <Picker.Item label="Traffic Sargent" value="TrafficSargent" />
                 <Picker.Item label="Traffic Inspector" value="TrafficInspector" />
                 <Picker.Item label="Member of Traffic Central Team" value="CentralTeam" />
                 <Picker.Item label="Member of Medical Emergency Team" value="MedicalTeam" />
-            </Picker>
+            </Picker> */}
 
             <Text
-            onPress={handleLogin} 
-            style={styles.button}>SIGN IN</Text>
+                onPress={handleLogin}
+                style={styles.button}>SIGN IN</Text>
 
             <Text
-            style={styles.login}
-            onPress={changepage}>Already Have an Account? Log In</Text>
+                style={styles.login}
+                onPress={changepage}>Already Have an Account? Log In</Text>
 
         </View>
     );

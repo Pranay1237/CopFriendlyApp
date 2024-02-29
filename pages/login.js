@@ -1,19 +1,42 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
-
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LOGIN_API } from './urls';
 export default Login = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     console.log('Logging in...');
+      try {
+          const res = await axios.post(LOGIN_API, {
+              email: username,
+              password: password,
+          });
+          console.log(res)
+          if(res.status === 200) {
+              console.log(res.data);
+              await AsyncStorage.setItem('user', JSON.stringify(res.data));
+              navigation.navigate('experiment');  
+          }
+          else if(res.status === 400) {
+              alert('Invalid Credentials');
+          }
+      } catch (error) {
+          alert('Invalid Password')
+          console.log(error)
+      }
 
-    navigation.navigate('experiment'); //TODO: Navigate to the menu page after the login
+    // navigation.navigate('experiment'); //TODO: Navigate to the menu page after the login
 
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'experiment' }],
-    }); // This code is to not let the app go back to login screen after loggin in when the back button is presseds
+
+
+
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: 'experiment' }],
+    // }); // This code is to not let the app go back to login screen after loggin in when the back button is presseds
   };
 
   const changepage = () => {
