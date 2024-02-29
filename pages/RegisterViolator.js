@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import DatePicker from '@react-native-community/datetimepicker';
 import { Text, TextInput, View, StyleSheet, Button, ScrollView, ToastAndroid } from "react-native";
+import { REGISTER_VIOLATOR } from "./urls";
 // import { get } from "http";
 
 export default RegisterViolator = ({ navigation }) => {
@@ -70,11 +71,14 @@ export default RegisterViolator = ({ navigation }) => {
         setShowTimePicker(false);
     };
 
-    const submitForm = () => {
-        if (formData.violatorName === "" || formData.violationType === "" || formData.drivingLicense === "" || formData.vehicleType === "" || formData.RegistrationNumber === "") {
-            ToastAndroid.show('Please Enter all the Details', ToastAndroid.SHORT);
-            return;
-        }
+    const submitForm = async () => {
+        // if (formData.violatorName === "" || formData.violationType === "" || formData.drivingLicense === "" || formData.vehicleType === "" || formData.RegistrationNumber === "") {
+        //     ToastAndroid.show('Please Enter all the Details', ToastAndroid.SHORT);
+        //     return;
+        // }
+        formData = {"RegistrationNumber": "Hehehe", "date": "2024-02-29 15:04:30", "drivingLicense": "Jdisijs", "location": "", "others": "", "vehicleColor": "Black", "vehicleType": "Auto", "violationType": "running red light", "violatorName": "Test"}
+        // console.log(formData);
+        await axios.post(REGISTER_VIOLATOR, formData);
         console.log('Form Submitted');
         ToastAndroid.show('Form Submitted', ToastAndroid.SHORT);
         console.log(formData);
@@ -83,7 +87,6 @@ export default RegisterViolator = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scroll}>
             <View style={styles.container}>
-
                 <TextInput
                     style={styles.input}
                     placeholder="Violators Name"
@@ -106,8 +109,8 @@ export default RegisterViolator = ({ navigation }) => {
 
                 <Picker
                     style={styles.picker}
-                    selectedValue={formData.vehicleType}
-                    onValueChange={value => handleInputChange('vehicleType', value)}>
+                    selectedValue={formData.violationType}
+                    onValueChange={value => handleInputChange('violationType', value)}>
                     <Picker.Item label="Select a Violation Type" value="" />
                     <Picker.Item label="speeding" value="speeding" />
                     <Picker.Item label="Parking Violation" value="Parking Violation" />

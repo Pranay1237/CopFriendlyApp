@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, View, FlatList, StyleSheet, TextInput, TouchableOpacity, LayoutAnimation, UIManager, Platform } from 'react-native';
-
 import jsonData from '../violators.json';
+import { GET_VIOLATORS } from './urls'
+import axios from 'axios';
 
 if (Platform.OS === 'android') {
     UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -9,9 +10,22 @@ if (Platform.OS === 'android') {
 
 export default NewViolators = ({ navigation }) => {
 
+
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredData, setFilteredData] = useState(jsonData);
     const [expandedItem, setExpandedItem] = useState(null);
+    const [mainData, setMainData] = useState([]);
+
+
+
+    useEffect(async () => {
+        const fetch = async () => {
+            const { data } = await axios.get(GET_VIOLATORS)
+            console.log(data);
+            setMainData(data);
+        }
+        await fetch();
+}, [])
 
     const handleSearch = (event) => {
         const query = event.nativeEvent.text;
@@ -98,7 +112,7 @@ export default NewViolators = ({ navigation }) => {
                 <Text 
                     style={styles.text}
                     onPress={changePage}>
-                        Add New Violator
+                    Add New Violator
                 </Text>
                 <Text style={styles.text1}
                     onPress={changeEmergency}>

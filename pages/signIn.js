@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { TextInput, View, StyleSheet, Text } from "react-native";
-import { Picker } from '@react-native-picker/picker';
+import { TextInput, View, StyleSheet, Text, Platform } from "react-native";
+import { Picker, PickerIOS } from '@react-native-picker/picker';
 import { REGISTER_API } from "./urls";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -14,6 +14,7 @@ export default SignIn = ({ navigation }) => {
     const [name, setName] = useState('');
 
     const handleLogin = async () => {
+        
         if (password !== repass) {
             alert('Passwords do not match');
             return;
@@ -24,11 +25,13 @@ export default SignIn = ({ navigation }) => {
                 name: name,
                 email: username,
                 password: password,
+                role : selectedValue
             })
             const res = await axios.post(REGISTER_API, {
                 name: name,
                 email: username,
                 password: password,
+                role : selectedValue
             });
             if (res.status === 200) {
                 alert('User Created');
@@ -114,17 +117,27 @@ export default SignIn = ({ navigation }) => {
                 value={repass}
                 onChangeText={setRepass}
             />
-            {/* <Picker
-                style={styles.picker}
-                selectedValue={selectedValue}
-                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-                <Picker.Item label="Select your role" value="" />
-                <Picker.Item label="Traffic Sargent" value="TrafficSargent" />
-                <Picker.Item label="Traffic Inspector" value="TrafficInspector" />
-                <Picker.Item label="Member of Traffic Central Team" value="CentralTeam" />
-                <Picker.Item label="Member of Medical Emergency Team" value="MedicalTeam" />
-            </Picker> */}
-
+            <Text
+                style={{ width: '90%', textAlign: 'left', marginLeft: 10, marginTop: 10, fontWeight: 'bold' }}>Select your role</Text>
+            {/* <TextInput
+                style={styles.input}
+                placeholder="A or B or C"
+                secureTextEntry
+                value={role}
+                onChangeText={setRole}
+            />
+           */}
+          
+                <Picker
+                    style={styles.picker}
+                    selectedValue={selectedValue}
+                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
+                    {/* <Picker.Item label="Select your role" value="" /> */}
+                    <Picker.Item label="Traffic Sargent" value="TrafficSargent" />
+                    <Picker.Item label="Traffic Inspector" value="TrafficSargent" />
+                    <Picker.Item label="Member of Traffic Central Team" value="CentralTeam" />
+                    <Picker.Item label="Member of Medical Emergency Team" value="MedicalTeam" />
+                </Picker>
             <Text
                 onPress={handleLogin}
                 style={styles.button}>SIGN IN</Text>
