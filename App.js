@@ -1,6 +1,7 @@
 // import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -13,14 +14,24 @@ import Payment from './pages/payment';
 import Emergency from './pages/emergency';
 import NewViolators from './pages/newViolators';
 import MoreDetails from './pages/moreDetails';
+import SOSAlert from './pages/sosAlert';
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
+    const [showAlert, setShowAlert] = useState(false);
+
     const sos = () => {
         console.log('SOS');
-        alert('SOS');
+        setShowAlert(true);
+        setTimeout(() => {
+            setShowAlert(false);
+        }, 5000);
+    };
+
+    const cancelSOS = () => {
+        setShowAlert(false);
     };
 
     return (
@@ -37,14 +48,16 @@ export default function App() {
                     options={{
                         title: 'Home',
                         headerRight: () => (
-                        <Text style={styles.sos} onPress={sos}>
-                            SOS
-                        </Text>
+                            <Text style={styles.sos} onPress={sos}>
+                                SOS
+                            </Text>
                         ),
                     }}
                     />
                 <Stack.Screen name="moreDetails" component={MoreDetails} />
             </Stack.Navigator>
+            {showAlert && <View style={styles.overlay} />}
+            {showAlert && <SOSAlert onCancel={cancelSOS} />}
         </NavigationContainer>
     );
 }
@@ -64,5 +77,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         borderRadius: 10,
         paddingHorizontal: 10,
+    },
+    soswindow: {
+        position: 'absolute',
+        top: 50,
+        left: 20,
+        backgroundColor: 'red',
+        padding: 10,
+        borderRadius: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 1,
     },
 });
