@@ -24,7 +24,7 @@ export default Login = ({ navigation }) => {
                         index: 0,
                         routes: [{ name: 'TrafficTeam' }],
                     });
-                } else if(res.data.role === '') {
+                } else if(res.data.role === 'MedicalTeam') {
                     navigation.reset({
                         index: 0,
                         routes: [{ name: 'MedicalTeam' }],

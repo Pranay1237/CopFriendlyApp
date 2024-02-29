@@ -14,7 +14,6 @@ export default SignIn = ({ navigation }) => {
     const [name, setName] = useState('');
 
     const handleLogin = async () => {
-        
         if (password !== repass) {
             alert('Passwords do not match');
             return;
@@ -25,33 +24,33 @@ export default SignIn = ({ navigation }) => {
                 name: name,
                 email: username,
                 password: password,
-                role : selectedValue
+                role: selectedValue
             })
             const res = await axios.post(REGISTER_API, {
                 name: name,
                 email: username,
                 password: password,
-                role : selectedValue
+                role: selectedValue
             });
             if (res.status === 200) {
                 alert('User Created');
                 console.log(res.data);
                 await AsyncStorage.setItem('user', JSON.stringify(res.data));
                 // navigation.navigate('Login');
-                if(res.data.role === 'CentralTeam') {
+                if (res.data.role === 'CentralTeam') {
                     navigation.reset({
                         index: 0,
                         routes: [{ name: 'TrafficTeam' }],
                     });
-                } else if(res.data.role === '') {
+                } else if (res.data.role === 'MedicalTeam') {
                     navigation.reset({
                         index: 0,
                         routes: [{ name: 'MedicalTeam' }],
                     });
                 } else {
                     navigation.reset({
-                    index: 0,
-                    routes: [{ name: 'experiment' }],
+                        index: 0,
+                        routes: [{ name: 'experiment' }],
                     });
                 }
                 // navigation.reset({
@@ -127,17 +126,20 @@ export default SignIn = ({ navigation }) => {
                 onChangeText={setRole}
             />
            */}
-          
-                <Picker
-                    style={styles.picker}
-                    selectedValue={selectedValue}
-                    onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}>
-                    {/* <Picker.Item label="Select your role" value="" /> */}
-                    <Picker.Item label="Traffic Sargent" value="TrafficSargent" />
-                    <Picker.Item label="Traffic Inspector" value="TrafficSargent" />
-                    <Picker.Item label="Member of Traffic Central Team" value="CentralTeam" />
-                    <Picker.Item label="Member of Medical Emergency Team" value="MedicalTeam" />
-                </Picker>
+
+            <Picker
+                style={styles.picker}
+                selectedValue={selectedValue}
+                onValueChange={(itemValue, itemIndex) => {
+                    console.log(itemValue);
+                    setSelectedValue(itemValue)
+                }}>
+                {/* <Picker.Item label="Select your role" value="" /> */}
+                <Picker.Item label="Traffic Sargent" value="TrafficSargent" />
+                <Picker.Item label="Traffic Inspector" value="TrafficSargent" />
+                <Picker.Item label="Member of Traffic Central Team" value="CentralTeam" />
+                <Picker.Item label="Member of Medical Emergency Team" value="MedicalTeam" />
+            </Picker>
             <Text
                 onPress={handleLogin}
                 style={styles.button}>SIGN IN</Text>
