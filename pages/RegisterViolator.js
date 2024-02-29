@@ -25,12 +25,12 @@ export default RegisterViolator = ({ navigation }) => {
         violatorName: '',
         violationType: '',
         drivingLicense: '',
+        mobileNumber: '',
         vehicleType: '',
         RegistrationNumber: '',
         vehicleColor: '',
         date: getCurrentDateTime(),
-        location: '',
-        others: ''
+        location: ''
     });
 
     const handleInputChange = (name, value) => {
@@ -95,6 +95,13 @@ export default RegisterViolator = ({ navigation }) => {
                     placeholder="Driving License Number"
                     value={formData.drivingLicense}
                     onChangeText={value => handleInputChange('drivingLicense', value)}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Mobile Number"
+                    value={formData.mobileNumber}
+                    keyboardType="numeric"
+                    onChangeText={value => handleInputChange('mobileNumber', value)}
                 />
 
                 <Picker

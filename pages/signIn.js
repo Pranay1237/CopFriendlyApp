@@ -35,10 +35,26 @@ export default SignIn = ({ navigation }) => {
                 console.log(res.data);
                 await AsyncStorage.setItem('user', JSON.stringify(res.data));
                 // navigation.navigate('Login');
-                navigation.reset({
+                if(res.data.role === 'CentralTeam') {
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'TrafficTeam' }],
+                    });
+                } else if(res.data.role === '') {
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'MedicalTeam' }],
+                    });
+                } else {
+                    navigation.reset({
                     index: 0,
-                    routes: [{ name: 'Menu' }],
-                });
+                    routes: [{ name: 'experiment' }],
+                    });
+                }
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{ name: 'Menu' }],
+                // });
             }
         }
         catch (error) {

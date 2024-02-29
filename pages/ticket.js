@@ -100,6 +100,10 @@ export default Ticket = ({ navigation, route }) => {
                         onChangeText={value => handleInputChange('amount', value)}
                     />
                 </View>
+
+                <Text style={styles.submit}>
+                    Submit
+                </Text>
                 
             </View>
         </View>
@@ -153,5 +157,18 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingLeft: 5,
         marginLeft: 10,
+    },
+    submit: {
+        width: '90%',
+        borderRadius: 15,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop: 50,
+        borderWidth: 1,
+        borderColor: 'black',
+        backgroundColor: 'black',
+        padding: 10,
+        color: 'white',
+        margin: 10,
     },
 });

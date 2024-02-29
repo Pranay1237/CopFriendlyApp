@@ -15,6 +15,8 @@ import Emergency from './pages/emergency';
 import NewViolators from './pages/newViolators';
 import MoreDetails from './pages/moreDetails';
 import SOSAlert from './pages/sosAlert';
+import TrafficTeam from './pages/trafficTeam';
+import MedicalTeam from './pages/medicalTeam';
 
 const Stack = createStackNavigator();
 
@@ -41,6 +43,8 @@ export default function App() {
                 <Stack.Screen name="Signin" component={SignIn} />
                 <Stack.Screen name="Menu" component={Menu} />
                 <Stack.Screen name="RegisterViolator" component={RegisterViolator} />
+                <Stack.Screen name="TrafficTeam" component={TrafficTeam} />
+                <Stack.Screen name="MedicalTeam" component={MedicalTeam} />
                 <Stack.Screen name="Ticket" component={Ticket} />
                 <Stack.Screen name="Payment" component={Payment} />
                 <Stack.Screen name="Emergency" component={Emergency} />
