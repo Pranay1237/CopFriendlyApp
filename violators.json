@@ -1,0 +1,140 @@
+[
+    {
+        "violatorName": "John Doe",
+        "violationType": "Speeding",
+        "drivingLicense": "ABC123456",
+        "vehicleType": "Car",
+        "registrationNumber": "XYZ123",
+        "vehicleColor": "Red",
+        "date": "2024-02-20T00:00:00.000Z",
+        "time": "2024-02-20T10:30:00.000Z",
+        "location": "123 Main Street",
+        "others": "Additional information here",
+        "tickets": [
+            {
+                "amount": 200,
+                "date": "2024-02-28T00:00:00.000Z",
+                "time": "2024-02-28T10:00:00.000Z",
+                "location": "City Hall"
+            },
+            {
+                "amount": 150,
+                "date": "2024-03-05T00:00:00.000Z",
+                "time": "2024-03-05T09:15:00.000Z",
+                "location": "Downtown"
+            }
+        ]
+    },
+    {
+        "violatorName": "Alice Smith",
+        "violationType": "Parking violation",
+        "drivingLicense": "DEF789012",
+        "vehicleType": "Bike",
+        "registrationNumber": "PQR456",
+        "vehicleColor": "Blue",
+        "date": "2024-02-21T00:00:00.000Z",
+        "time": "2024-02-21T14:45:00.000Z",
+        "location": "456 Elm Street",
+        "others": "Details about the violation",
+        "tickets": [
+            {
+                "amount": 250,
+                "date": "2024-02-28T00:00:00.000Z",
+                "time": "2024-02-28T10:00:00.000Z",
+                "location": "City Hall"
+            }
+        ]
+    },
+    {
+        "violatorName": "Bob Johnson",
+        "violationType": "Running red light",
+        "drivingLicense": "GHI345678",
+        "vehicleType": "Truck",
+        "registrationNumber": "JKL789",
+        "vehicleColor": "Green",
+        "date": "2024-02-22T00:00:00.000Z",
+        "time": "2024-02-22T08:15:00.000Z",
+        "location": "789 Oak Avenue",
+        "others": "Additional notes",
+        "tickets": [
+            {
+                "amount": 180,
+                "date": "2024-03-02T00:00:00.000Z",
+                "time": "2024-03-02T15:45:00.000Z",
+                "location": "Police Station"
+            },
+            {
+                "amount": 220,
+                "date": "2024-03-10T00:00:00.000Z",
+                "time": "2024-03-10T11:30:00.000Z",
+                "location": "Court House"
+            }
+        ]
+    },
+    {
+        "violatorName": "Jane Smith",
+        "violationType": "Driving under influence",
+        "drivingLicense": "MNO901234",
+        "vehicleType": "Car",
+        "registrationNumber": "STU456",
+        "vehicleColor": "Black",
+        "date": "2024-02-23T00:00:00.000Z",
+        "time": "2024-02-23T19:30:00.000Z",
+        "location": "987 Maple Street",
+        "others": "Intoxicated while driving",
+        "tickets": [
+            {
+                "amount": 300,
+                "date": "2024-03-15T00:00:00.000Z",
+                "time": "2024-03-15T17:20:00.000Z",
+                "location": "Highway"
+            }
+        ]
+    },
+    {
+        "violatorName": "Emily Brown",
+        "violationType": "Illegal U-turn",
+        "drivingLicense": "PQR567890",
+        "vehicleType": "Car",
+        "registrationNumber": "VWX789",
+        "vehicleColor": "White",
+        "date": "2024-02-24T00:00:00.000Z",
+        "time": "2024-02-24T11:00:00.000Z",
+        "location": "654 Pine Street",
+        "others": "Making an illegal maneuver",
+        "tickets": [
+            {
+                "amount": 180,
+                "date": "2024-03-03T00:00:00.000Z",
+                "time": "2024-03-03T14:30:00.000Z",
+                "location": "Local Road"
+            },
+            {
+                "amount": 220,
+                "date": "2024-03-11T00:00:00.000Z",
+                "time": "2024-03-11T09:45:00.000Z",
+                "location": "Junction"
+            }
+        ]
+    },
+    {
+        "violatorName": "Michael Johnson",
+        "violationType": "Expired license",
+        "drivingLicense": "STU123456",
+        "vehicleType": "Car",
+        "registrationNumber": "YZA890",
+        "vehicleColor": "Silver",
+        "date": "2024-02-25T00:00:00.000Z",
+        "time": "2024-02-25T15:20:00.000Z",
+        "location": "321 Cedar Street",
+        "others": "Driving with an expired license",
+        "tickets": [
+            {
+                "amount": 250,
+                "date": "2024-03-01T00:00:00.000Z",
+                "time": "2024-03-01T10:45:00.000Z",
+                "location": "DMV Office"
+            }
+        ]
+    }
+]

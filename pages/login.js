@@ -8,11 +8,11 @@ export default Login = ({ navigation }) => {
   const handleLogin = () => {
     console.log('Logging in...');
 
-    navigation.navigate('Menu'); //TODO: Navigate to the menu page after the login
+    navigation.navigate('experiment'); //TODO: Navigate to the menu page after the login
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Menu' }],
+      routes: [{ name: 'experiment' }],
     }); // This code is to not let the app go back to login screen after loggin in when the back button is presseds
   };
 
