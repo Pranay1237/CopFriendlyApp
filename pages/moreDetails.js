@@ -9,28 +9,6 @@ export default MoreDetails = ({ navigation, route }) => {
     
     const violator = jsonData.find(v => v.drivingLicense === number);
 
-    const changeTime = (time) => {
-        const timeString = new Date(time).toISOString();
-        const timeOnly = timeString.split("T")[1].substring(0, 5);
-        const [hours, minutes] = timeOnly.split(":");
-        const twelveHourFormat = (parseInt(hours, 10) % 12).toString();
-        const amOrPm = parseInt(hours, 10) >= 12 ? "PM" : "AM";
-        const formattedTime = `${twelveHourFormat}:${minutes} ${amOrPm}`;
-        return formattedTime;
-    }
-
-    const changeDate = (date) => {
-        const dateObject = new Date(date);
-        const day = dateObject.getDate();
-        const month = dateObject.getMonth() + 1;
-        const year = dateObject.getFullYear();
-        const formattedDate = `${day < 10 ? "0" + day : day}-${month < 10 ? "0" + month : month}-${year}`;
-        return formattedDate;
-    }
-
-    const time = changeTime(violator.time);
-    const date = changeDate(violator.date);
-
     const ticks = [];
 
     for (let i = 0; i < violator.tickets.length; i++) {
@@ -48,44 +26,19 @@ export default MoreDetails = ({ navigation, route }) => {
                         <Text style={styles.value}>{violator.violatorName}</Text>
                     </View>
                     <View style={styles.details}>
-                        <Text style={styles.label}>Violation Type</Text>
-                        <Text> : </Text>
-                        <Text style={styles.value}>{violator.violationType}</Text>
-                    </View>
-                    <View style={styles.details}>
                         <Text style={styles.label}>Driving License</Text>
                         <Text> : </Text>
                         <Text style={styles.value}>{violator.drivingLicense}</Text>
                     </View>
                     <View style={styles.details}>
-                        <Text style={styles.label}>Vehicle Type</Text>
+                        <Text style={styles.label}>Age</Text>
                         <Text> : </Text>
-                        <Text style={styles.value}>{violator.vehicleType}</Text>
+                        <Text style={styles.value}>{violator.age}</Text>
                     </View>
                     <View style={styles.details}>
-                        <Text style={styles.label}>Registration Number</Text>
+                        <Text style={styles.label}>Mobile Number</Text>
                         <Text> : </Text>
-                        <Text style={styles.value}>{violator.registrationNumber}</Text>
-                    </View>
-                    <View style={styles.details}>
-                        <Text style={styles.label}>Vehicle Color</Text>
-                        <Text> : </Text>
-                        <Text style={styles.value}>{violator.vehicleColor}</Text>
-                    </View>
-                    <View style={styles.details}>
-                        <Text style={styles.label}>Date</Text>
-                        <Text> : </Text>
-                        <Text style={styles.value}>{date}</Text>
-                    </View>
-                    <View style={styles.details}>
-                        <Text style={styles.label}>Time</Text>
-                        <Text> : </Text>
-                        <Text style={styles.value}>{time}</Text>
-                    </View>
-                    <View style={styles.details}>
-                        <Text style={styles.label}>Others</Text>
-                        <Text> : </Text>
-                        <Text style={styles.value}>{violator.others}</Text>
+                        <Text style={styles.value}>{violator.mobileNumber}</Text>
                     </View>
                 </View>
                 <View style={styles.box}>
@@ -93,8 +46,10 @@ export default MoreDetails = ({ navigation, route }) => {
                     {ticks.map((tick, index) => (
                         <View key={index} style={styles.innerBox}>
                             <Text>Amount : {tick.amount}</Text>
-                            <Text>Date : {changeDate(tick.date)}</Text>
-                            <Text>Time : {changeTime(tick.time)}</Text>
+                            <Text>Violation Type : {tick.violationType}</Text>
+                            <Text>Amount : {tick.amount}</Text>
+                            <Text>Date : {tick.date}</Text>
+                            <Text>Time : {tick.time}</Text>
                             <Text>Location : {tick.location}</Text>
                         </View>
                     ))}

@@ -39,7 +39,7 @@ export default NewViolators = ({ navigation }) => {
                 <View style={styles.item}>
                     <Text>Violators Name : {item.violatorName}</Text>
                     <Text>Driving License : {item.drivingLicense}</Text>
-                    <Text>Registration Number : {item.registrationNumber}</Text>
+                    <Text>Mobile number : {item.mobileNumber}</Text>
                     {isExpanded && (
                         <View style={styles.expand}>
                             <Text style={styles.innerText}

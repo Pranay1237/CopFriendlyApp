@@ -1,13 +1,13 @@
 // import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './pages/login';
 import SignIn from './pages/signIn';
 import Menu from './pages/menu';
-import RegisterViolator from './pages/registerViolator';
+import RegisterViolator from './pages/RegisterViolator';
 import Ticket from './pages/ticket';
 import Payment from './pages/payment';
 import Emergency from './pages/emergency';
@@ -17,28 +17,52 @@ import MoreDetails from './pages/moreDetails';
 const Stack = createStackNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Signin" component={SignIn} />
-            <Stack.Screen name="Menu" component={Menu} />
-            <Stack.Screen name="RegisterViolator" component={RegisterViolator} />
-            <Stack.Screen name="Ticket" component={Ticket} />
-            <Stack.Screen name="Payment" component={Payment} />
-            <Stack.Screen name="Emergency" component={Emergency} />
-            <Stack.Screen name="experiment" component={NewViolators} />
-            <Stack.Screen name="moreDetails" component={MoreDetails} />
-        </Stack.Navigator>
-    </NavigationContainer>
-  );
+
+    const sos = () => {
+        console.log('SOS');
+        alert('SOS');
+    };
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Signin" component={SignIn} />
+                <Stack.Screen name="Menu" component={Menu} />
+                <Stack.Screen name="RegisterViolator" component={RegisterViolator} />
+                <Stack.Screen name="Ticket" component={Ticket} />
+                <Stack.Screen name="Payment" component={Payment} />
+                <Stack.Screen name="Emergency" component={Emergency} />
+                <Stack.Screen name="experiment" component={NewViolators} 
+                    options={{
+                        title: 'Home',
+                        headerRight: () => (
+                        <Text style={styles.sos} onPress={sos}>
+                            SOS
+                        </Text>
+                        ),
+                    }}
+                    />
+                <Stack.Screen name="moreDetails" component={MoreDetails} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    sos: {
+        marginRight: 20,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white',
+        backgroundColor: 'red',
+        borderRadius: 10,
+        paddingHorizontal: 10,
+    },
 });
